@@ -37,7 +37,6 @@ def run_find_movie():
     select_menu = st.selectbox('무엇을 기준으로 영화를 찾으시겠습니까?', menu)
     if select_menu == '영화 제목으로 검색':
         search_title()
-        st.dataframe(movie_review_count_rating)
     elif select_menu == '카테고리 별로 보기':
         search_category()
     else:
@@ -47,7 +46,22 @@ def run_find_movie():
 def search_title():
     searched_title = st.text_input('영화 제목을 입력하세요')
     if len(searched_title) != 0:
-        st.dataframe(movie_id_titles_df.loc[movie_id_titles_df['title'].str.lower().str.contains(searched_title.lower()) == True,]['title'])
+        
+        searched_title_df = movie_id_titles_df.loc[movie_id_titles_df['title'].str.lower().str.contains(searched_title.lower()) == True,]['title']
+
+        if sum(movie_id_titles_df.loc[movie_id_titles_df['title'].str.lower().str.contains(searched_title.lower())) != 0:
+            find_title = searched_title_df.iloc[0]
+        else:
+            pass
+
+
+
+        if len(find_title) != 0:
+            st.success('찾으신 영화 제목은 \"{}\"인 것 같습니다.'.format(find_title))
+        else:
+            st.failure('찾으신 ')
+
+            
     else:
         pass
 
