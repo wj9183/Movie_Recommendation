@@ -30,7 +30,9 @@ movie_review_count_rating.columns = ['title', 'review_counts', 'average_rating']
 
 #이 파일의 메인 함수
 def run_find_movie():
-    menu = ['', '영화 제목으로 검색', '카테고리 별로 보기']
+
+    st.title('영화 검색 메뉴입니다.')
+    menu = ['메뉴를 골라보세요.', '영화 제목으로 검색', '카테고리 별로 보기']
     movie_id_titles_df = pd.read_csv('Movie_Id_Titles')
     select_menu = st.selectbox('무엇을 기준으로 영화를 찾으시겠습니까?', menu)
     if select_menu == '영화 제목으로 검색':
