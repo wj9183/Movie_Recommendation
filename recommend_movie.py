@@ -29,7 +29,7 @@ def recommend_movie():
     menu = ['','취향에 맞는 영화로부터 추천받기', '취향에 맞지 않은 영화로부터 추천받기']
     select_menu = st.selectbox('추천받을 방법을 고르세요', menu)
     if select_menu == '취향에 맞는 영화로부터 추천받기':
-        favorite_movie = st.text_input('취향이였던 영화 제목을 입력하세요')
+        favorite_movie = st.text_input('가장 취향에 맞았던 영화 제목을 입력하세요')
         
 
 
