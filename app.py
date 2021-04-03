@@ -6,6 +6,8 @@ import seaborn as sns
 import os
 from find_movie import run_find_movie
 from recommend_movie import recommend_movie
+from information import run_information
+from about_data import run_about_data
 
 
 def main():
@@ -16,13 +18,13 @@ def main():
 
 
     if select_menu == '취미로서의 영화':
-        st.write('취미로서 영화가 어떤지 알려줌')
+        run_information()
     elif select_menu == '영화 직접 찾기':
         run_find_movie()
     elif select_menu == '영화 추천 프로그램':
         recommend_movie()
     elif select_menu == '수집되어있는 데이터 수집 현황':
-        pass
+        run_about_data()
     else:
         st.write('잘못된 접근입니다.')
         pass

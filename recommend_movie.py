@@ -1,10 +1,10 @@
 import pandas as pd
 import streamlit as st
 
-movie_id_titles_df = pd.read_csv('Movie_Id_Titles')
+movie_id_titles_df = pd.read_csv('./data/Movie_Id_Titles')
 
 
-movie_ratings_df = pd.read_csv('u.data', sep = '\t', names = ['user_id', 'item_id', 'rating', 'timestamp'])
+movie_ratings_df = pd.read_csv('./data/u.data', sep = '\t', names = ['user_id', 'item_id', 'rating', 'timestamp'])
 movie_df = pd.merge(movie_id_titles_df,movie_ratings_df, on = 'item_id')
 
 movie_review_count = movie_df['title'].value_counts()

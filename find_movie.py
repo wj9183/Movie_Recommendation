@@ -3,9 +3,9 @@ import streamlit as st
 
 
 #영화 제목 데이터프레임, 영화 별점 데이터프레임, 그리고 그걸 합친 데이터프레임.
-movie_id_titles_df = pd.read_csv('Movie_Id_Titles')
+movie_id_titles_df = pd.read_csv('./data/Movie_Id_Titles')
 
-movie_ratings_df = pd.read_csv('u.data', sep = '\t', names = ['user_id', 'item_id', 'rating', 'timestamp'])
+movie_ratings_df = pd.read_csv('./data/u.data', sep = '\t', names = ['user_id', 'item_id', 'rating', 'timestamp'])
 movie_df = pd.merge(movie_id_titles_df,movie_ratings_df, on = 'item_id')
 
 
@@ -33,7 +33,6 @@ def run_find_movie():
 
     st.title('영화 검색 메뉴입니다.')
     menu = ['메뉴를 골라보세요.', '영화 제목으로 검색', '카테고리 별로 보기']
-    movie_id_titles_df = pd.read_csv('Movie_Id_Titles')
     select_menu = st.selectbox('무엇을 기준으로 영화를 찾으시겠습니까?', menu)
     if select_menu == '영화 제목으로 검색':
         search_title()
@@ -45,11 +44,12 @@ def run_find_movie():
 #영화 제목으로 검색하기
 def search_title():
     searched_title = st.text_input('영화 제목을 입력하세요')
+    find_title = ''
     if len(searched_title) != 0:
         
         searched_title_df = movie_id_titles_df.loc[movie_id_titles_df['title'].str.lower().str.contains(searched_title.lower()) == True,]['title']
 
-        if sum(movie_id_titles_df.loc[movie_id_titles_df['title'].str.lower().str.contains(searched_title.lower())) != 0:
+        if sum(movie_id_titles_df['title'].str.lower().str.contains(searched_title.lower())) != 0:
             find_title = searched_title_df.iloc[0]
         else:
             pass
@@ -59,7 +59,7 @@ def search_title():
         if len(find_title) != 0:
             st.success('찾으신 영화 제목은 \"{}\"인 것 같습니다.'.format(find_title))
         else:
-            st.failure('찾으신 ')
+            st.warning('찾으시는 영화가 등록된 리스트에 없습니다.')
 
             
     else:
